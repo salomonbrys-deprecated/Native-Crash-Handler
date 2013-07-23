@@ -7,8 +7,8 @@ public class NativeCrashACRAHandler {
 
 	Context ctx;
 	
-	private void makeCrashReport(String signal) {
-		NativeError e = new NativeError("NATIVE signal: " + signal);
+	private void makeCrashReport(String reason) {
+		NativeError e = new NativeError(reason);
 		Intent intent = new Intent(ctx, NativeCrashACRAActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.putExtra("error", e);

@@ -8,6 +8,8 @@ extern "C" {
 
 void nativeCrashACRAHandler_onLoad(JavaVM* jvm);
 
+void makeCrashReport(const char *reason);
+
 #ifdef __cplusplus
 }
 #endif

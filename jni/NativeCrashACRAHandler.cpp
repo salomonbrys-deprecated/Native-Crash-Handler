@@ -14,12 +14,20 @@ static jclass applicationClass = 0;
 static jmethodID makeCrashReportMethod;
 static jobject applicationObject = 0;
 
+void makeCrashReport(const char *reason) {
+	if (env && applicationObject)
+		env->CallVoidMethod(applicationObject, makeCrashReportMethod, env->NewStringUTF(reason));
+	else
+		__android_log_print(ANDROID_LOG_ERROR, "NativeCrashACRAHandler",
+				"Could not create native crash report as registerForNativeCrash was not called in JAVA context\n"
+				"Crash was: %s",
+				reason
+		);
+}
+
 void nativeCrashACRAHandler_sigaction(int signal, struct siginfo *info, void *reserved) {
 
-	if (env && applicationObject)
-		env->CallVoidMethod(applicationObject, makeCrashReportMethod, env->NewStringUTF(strsignal(signal)));
-	else
-		__android_log_print(ANDROID_LOG_ERROR, "NativeCrashACRAHandler", "Could not create native crash report as registerForNativeCrash was not called in JAVA context");
+	makeCrashReport(strsignal(signal));
 
 	if (old_sa[signal].sa_handler)
 		old_sa[signal].sa_handler(signal);
