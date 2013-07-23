@@ -21,3 +21,4 @@ src/com/example/
 jni/CrashApplication.cpp
 jni/*.mk
 
+build/
