@@ -53,7 +53,7 @@ Your application must already be configured to use [ACRA](https://github.com/ACR
 7.  In your AndroidManifest.xml, add:
 
         <activity
-            android:name="com.github.nativeacra.NativeCrashACRAActivity"
+            android:name="com.github.nativehandler.NativeCrashActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:exported="false"
             android:process=":CrashHandler"
