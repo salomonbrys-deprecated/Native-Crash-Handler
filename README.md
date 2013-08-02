@@ -1,5 +1,4 @@
-Native-Crash-Handler
-====================
+# Native-Crash-Handler
 
 A simple set of code to enable JNI Native crashes to be caught by java and throw a meaningfull exception
 
@@ -58,6 +57,9 @@ This tool has been largely inspired by [Chris Boyle's great SO answer](http://st
 
 8.  ***You're done***
 
+
+
+# Advanced usage
 
 ## Stack Trace
 
@@ -172,7 +174,7 @@ and should be replaced with:
 	}
 ```
 
-## Advanced use: Activity Context
+## Activity Context
 
 Sometimes, you need to register the *NativeCrashACRAHandler* with an *Activity Context* instead of an *Application Context*.
 Please remember that this should not be done if you can use the *Application Context*.
