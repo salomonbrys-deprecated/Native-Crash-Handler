@@ -22,8 +22,10 @@ struct Stack {
 	int capacity;
 	int size;
 	StackEntry *entries;
+	const char *nextFile;
+	int nextLine;
 
-	Stack() : capacity(64), size(0) {
+	Stack() : capacity(64), size(0), nextFile(NULL), nextLine(0) {
 		entries = (StackEntry*)malloc(capacity * sizeof(StackEntry));
 	}
 
@@ -38,16 +40,24 @@ struct Stack {
 		}
 
 		entries[size].mtd = mtd;
-		entries[size].file = file;
-		entries[size].line = line;
+		entries[size].file = nextFile ? nextFile : file;
+		entries[size].line = nextFile ? nextLine : line;
+
+		nextFile = NULL;
 
 		++size;
 	}
 
 	void pop() {
+		nextFile = NULL;
 		if (size == 0)
 			return ;
 		--size;
+	}
+
+	void next(const char *file, int line) {
+		nextFile = file;
+		nextLine = line;
 	}
 };
 
@@ -93,6 +103,10 @@ static jclass stackTraceElementClass = 0;
 static jmethodID stackTraceElementMethod;
 
 static JavaVM *javaVM;
+
+void __nativeCrashHandler_stack_call(const char *file, int line) {
+	Stacks::get()->next(file, line);
+}
 
 void __nativeCrashHandler_stack_push(const char *mtd, const char *file, int line) {
 	Stacks::get()->push(mtd, file, line);
