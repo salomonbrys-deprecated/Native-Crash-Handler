@@ -9,7 +9,8 @@ public class NativeCrashHandler {
 	
 	private void makeCrashReport(String reason, StackTraceElement[] stack, int threadID) {
 		
-		NativeError.natSt = stack;
+		if (stack != null)
+			NativeError.natSt = stack;
 		NativeError e = new NativeError(reason, threadID);
 		Intent intent = new Intent(ctx, NativeCrashActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
