@@ -39,7 +39,7 @@ This tool has been largely inspired by [Chris Boyle's great SO answer](http://st
 
 6.  In The JNI_OnLoad JNI C function, add:
 ```java
-    #include "nativeCrashHandler.h"
+    #include "NativeCrashHandler.h"
     /*...*/
     nativeCrashHandler_onLoad(jvm);
 ```
