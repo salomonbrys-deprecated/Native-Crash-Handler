@@ -1,3 +1,17 @@
+
+## THIS PROJECT IS DISCONTINUED
+
+While this has been an experiment, it turns out that Android native stack is too:
+
+ - Stripped out of all linux debuging goodies
+ - dependant of processor & driver implementations.
+
+Moreover, the use of this library usually makes matter worse when the app crashes inside a thread : The Android system tries to restart the faulting activity making the app having an infinite crash loop.
+
+This project remains here for reference, but I advise against using it until some better way to debug native code is found.
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
 # Native-Crash-Handler
 
 A simple set of code to enable JNI Native crashes to be caught by java and throw a meaningfull exception
